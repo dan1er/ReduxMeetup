@@ -1,0 +1,38 @@
+@border-color: #d6cece;
+@box-shadow: #dad1d1;
+
+:host /deep/ .container {
+	border: 1px solid @border-color;
+	box-shadow: 0 0 1px @box-shadow;
+	background: #f2f2f2;
+	animation-name: fadeIn;
+	animation-duration: .2s;
+	opacity: 1;
+}
+
+.links {
+	a {
+		padding: 5px;
+		background-color: #f2f2f2;
+		border-radius: 3px;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: bolder;
+		font-size: 16px;
+		color: #bf124d;
+		margin-right: 10px;
+	}
+
+	margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateX(-500px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}

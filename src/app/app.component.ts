@@ -6,6 +6,9 @@ import {combineReducers} from 'redux';
 import {createEpicMiddleware, combineEpics} from 'redux-observable';
 import CalculatorEpics from './components/basic-calculator/calculator.epics';
 import calculatorReducer from './components/basic-calculator/calculator.reducers';
+import {routerReducer, NgReduxRouter} from '@angular-redux/router';
+import reduxFormReducer from './components/redux-form/redux-form.reducers';
+import ReduxFormEpics from './components/redux-form/redux-form.epics';
 
 @Component({
     selector: 'app-root',
@@ -13,9 +16,11 @@ import calculatorReducer from './components/basic-calculator/calculator.reducers
     styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-    constructor(private ngRedux: NgRedux<any>,
-                private devTools: DevToolsExtension,
-                private calculatorEpics: CalculatorEpics) {
+    constructor(private _ngRedux: NgRedux<any>,
+                private _ngReduxRouter: NgReduxRouter,
+                private _devTools: DevToolsExtension,
+                private _calculatorEpics: CalculatorEpics,
+                private _reduxFormEpics: ReduxFormEpics) {
         this.configureStore();
     }
 
@@ -23,19 +28,26 @@ export class AppComponent {
         const rootReducer = composeReducers(
             defaultFormReducer(),
             combineReducers({
-                calculator: calculatorReducer
+                calculator: calculatorReducer,
+                router: routerReducer,
+                basicForm: reduxFormReducer
             })
         );
 
-        this.ngRedux.configureStore(
+        this._ngRedux.configureStore(
             rootReducer,
             {},
             [
-                createEpicMiddleware(combineEpics(...this.calculatorEpics.epics))
+                createEpicMiddleware(combineEpics(
+                    ...this._calculatorEpics.epics,
+                    ...this._reduxFormEpics.epics
+                ))
             ],
-            this.devTools.isEnabled() ? [this.devTools.enhancer()] : null
+            this._devTools.isEnabled() ? [this._devTools.enhancer()] : null
         );
 
-        provideReduxForms(this.ngRedux);
+        this._ngReduxRouter.initialize();
+
+        provideReduxForms(this._ngRedux);
     }
 }

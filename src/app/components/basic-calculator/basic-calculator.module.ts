@@ -17,5 +17,5 @@ import CalculatorService from './calculator.service';
     declarations: [CalculatorComponent],
     exports: [CalculatorComponent]
 })
-export class BasicCalculatorModule {
+export default class BasicCalculatorModule {
 }

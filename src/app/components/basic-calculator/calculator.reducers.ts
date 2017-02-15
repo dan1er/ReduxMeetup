@@ -1,6 +1,6 @@
 import {IAction} from '../../core/action';
-import {ICalculatorState} from './calculator-state';
 import CalculatorActions from './calculator.actions';
+import {ICalculatorState} from '../../app.state';
 
 const defaultState: ICalculatorState = { currentValue: "0", history: [], currentExpression: "" };
 
@@ -17,7 +17,7 @@ export default function calculatorReducer(state: ICalculatorState = defaultState
             });
         case CalculatorActions.CLEAR_CURRENT:
             return Object.assign({}, state, {
-                currentValue: "0",
+                currentValue: !state.currentExpression && "0" || "",
                 currencyConversion: "",
                 decimalActive: false,
                 operatorActive: false
@@ -51,7 +51,7 @@ export default function calculatorReducer(state: ICalculatorState = defaultState
             });
         case CalculatorActions.CALCULATE_EXPRESSION:
             let expression = `${state.currentExpression}${state.currentValue}`,
-                calculatedValue = eval(expression).toFixed(2);
+                calculatedValue = eval(expression);
 
             return Object.assign({}, state, {
                 currentOperator: "",

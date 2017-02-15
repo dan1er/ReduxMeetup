@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {NgRedux, select} from '@angular-redux/store';
-import {ICalculatorState} from '../calculator-state';
 import CalculatorActions from '../calculator.actions';
 import {Observable} from 'rxjs';
+import {IAppState} from '../../../app.state';
 
 interface ICalculatorButton {
     text: string,
@@ -18,7 +18,7 @@ interface ICurrency {
 @Component({
     selector: 'redux-calculator',
     template: `
-        <div class="calculator-container">
+        <div class="calculator-container container">
             <div class="display-box">
                 <span *ngIf="(currencyConversion$|async)">{{currencyConversion$|async}}</span>
                 {{currentExpression$|async}}{{currentValue$|async}}
@@ -56,7 +56,7 @@ export class CalculatorComponent {
     public buttons: ICalculatorButton[];
     public currencies: ICurrency[];
 
-    constructor(private _ngRedux: NgRedux<ICalculatorState>,
+    constructor(private _ngRedux: NgRedux<IAppState>,
                 private _calculatorActions: CalculatorActions) {
         this.setCalculatorButtons();
         this.setCurrencies();

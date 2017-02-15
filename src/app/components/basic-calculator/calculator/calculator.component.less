@@ -3,11 +3,8 @@
 
 .calculator-container {
 	width: 400px;
-	border: 1px solid @border-color;
-	box-shadow: 0 0 1px @box-shadow;
 	border-radius: 4px;
 	padding: 10px;
-	background: #f2f2f2;
 	float: left;
 
 	.display-box {
@@ -28,9 +25,6 @@
 			font-size: 17px;
 			font-weight: 900;
 			top: 12px;
-			animation-name: fadeIn;
-			animation-duration: 2s;
-			opacity: 1;
 		}
 	}
 
@@ -98,18 +92,6 @@
 			font-size: 29px;
 			color: #bf124d;
 			letter-spacing: 3px;
-			animation-name: fadeIn;
-			animation-duration: 2s;
-			opacity: 1;
 		}
-	}
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0
-	}
-	to {
-		opacity: 1
 	}
 }

@@ -3,9 +3,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
 import {AppComponent} from './app.component';
-import {BasicCalculatorModule} from './components/basic-calculator/basic-calculator.module';
+import {routing} from './routing/app.routes';
+import BasicCalculatorModule from './components/basic-calculator/basic-calculator.module';
+import ReduxFormModule from './components/redux-form/redux-form.module';
+import {NgReduxRouter} from '@angular-redux/router';
 
 @NgModule({
     declarations: [
@@ -16,9 +18,11 @@ import {BasicCalculatorModule} from './components/basic-calculator/basic-calcula
         FormsModule,
         HttpModule,
         NgReduxModule,
-        BasicCalculatorModule
+        routing,
+        BasicCalculatorModule,
+        ReduxFormModule
     ],
-    providers: [],
+    providers: [NgReduxRouter],
     bootstrap: [AppComponent]
 })
 export class AppModule {
